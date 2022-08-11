@@ -67,8 +67,8 @@ class WattsApi:
         """load devices for each smart home"""
         if self._smartHomeData is not None:
             for y in range(len(self._smartHomeData)):
-                devices = self.loadDevices(self._smartHomeData[str(y)]["smarthome_id"])
-                self._smartHomeData[str(y)]["devices"] = devices
+                devices = self.loadDevices(self._smartHomeData[y]["smarthome_id"])
+                self._smartHomeData[y]["devices"] = devices
 
         return True
 
