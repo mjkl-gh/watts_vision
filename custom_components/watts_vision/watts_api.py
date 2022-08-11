@@ -85,9 +85,9 @@ class WattsApi:
 
         if user_data_result.status_code == 200:
             if (
-                user_data_result.json()["code"]["code"] == "1"
-                and user_data_result.json()["code"]["key"] == "OK"
-                and user_data_result.json()["code"]["value"] == "OK"
+                user_data_result.json()["code"]["code"] == "8"
+                and user_data_result.json()["code"]["key"] == "OK_SET"
+                and user_data_result.json()["code"]["value"] == "Insert / update success"
             ):
                 return user_data_result.json()["data"]["smarthomes"]
             else:
