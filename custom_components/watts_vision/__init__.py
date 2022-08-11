@@ -21,6 +21,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     hass.data.setdefault(DOMAIN, {})
 
     client = WattsApi(hass, entry.data[CONF_USERNAME], entry.data[CONF_PASSWORD])
+    _LOGGER.debug("Get login token")
+    await hass.async_add_executor_job(client.getLoginToken)
+    _LOGGER.debug("Load data")
     await hass.async_add_executor_job(client.loadData)
 
     hass.data[DOMAIN][API_CLIENT] = client
@@ -31,6 +34,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         )
 
     async def refresh_devices(event_time):
+        _LOGGER.debug("refresh login token")
+        await hass.async_add_executor_job(client.getLoginToken)
+        _LOGGER.debug("reload devices")
         await hass.async_add_executor_job(client.reloadDevices)
 
     async_track_time_interval(hass, refresh_devices, SCAN_INTERVAL)
