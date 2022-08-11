@@ -75,7 +75,7 @@ class WattsApi:
     def loadSmartHomes(self, firstTry: bool = True):
         """Load the user data"""
         headers = {"Authorization": f"Bearer {self._token}"}
-        payload = {"token": "true", "email": self._username, "lang": "nl_NL"}
+        payload = {"token": self._token, "email": self._username, "lang": "nl_NL"}
 
         user_data_result = requests.post(
             url="https://smarthome.wattselectronics.com/api/v0.1/human/user/read/",
